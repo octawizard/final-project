@@ -125,49 +125,6 @@ function getFeetBack(){
 	return COLOR(dark_grey)(feet_back);
 }
 
-var feet = STRUCT([getFeetFront(), getFeetBack()]);
-
-
-
-
-//================= Modello di tubo ========================================
-/*
-var domain = PROD1x1([INTERVALS(1)(14),INTERVALS(1)(14)]);
-var c1 = CUBIC_HERMITE(S0)([[1,0,0],[0,1,0],[0,2,0],[-3,0,0]]);
-var c2 = CUBIC_HERMITE(S0)([[0.5,0,0],[0,0.5,0],[0,1.5,0],[-1,0,0]]);
-var sur31 = CUBIC_HERMITE(S1)([c1,c2,[0,0,1],[0,0,-1]]);
-var out = MAP(sur31)(domain);
-DRAW(out);
-
-var sur311 = CUBIC_HERMITE(S1)([c1,c2,[0,0,-1],[0,0,1]]);
-var out = MAP(sur311)(domain);
-DRAW(out);
-*/
-//===========================================================================
-
-/*var domain = PROD1x1([INTERVALS(1)(14),INTERVALS(1)(14)]);
-var c1 = CUBIC_HERMITE(S0)([[1,0,0],[0,0,0],[0,0,0],[0,0,0]]);
-var c2 = CUBIC_HERMITE(S0)([[1,1,0],[0,1,0],[0,0,0],[0,0,0]]);
-var sur31 = CUBIC_HERMITE(S1)([c1,c2,[0,0,2],[0,0,-2]]);
-var out = MAP(sur31)(domain);
-DRAW(out);
-
-var sur311 = CUBIC_HERMITE(S1)([c1,c2,[0,0,-2],[0,0,2]]);
-var out = MAP(sur311)(domain);
-DRAW(out);
-
-
-var domain = PROD1x1([INTERVALS(1)(14),INTERVALS(1)(14)]);
-var surb = CUBIC_HERMITE(S1)([b1_dx,b2_dx,[0,2,0],[0,-2,0]]);
-var out = MAP(surb)(domain);
-DRAW(out);
-
-var sur311 = CUBIC_HERMITE(S1)([b1_dx,b2_dx,[0,-2,0],[0,2,0]]);
-var out = MAP(sur311)(domain);
-DRAW(out)*/
-//posso hermittare le curve di bezier
-
-//usare hermit per i tubi che entrano verso y. bezier per quelli costanti sull'asse x,z
 
 function getTubeFront(){
 	var b1 = BEZIER(S0)([[-7.75 +0.1, 0, 7], [-5, 0.2, 0.9], [0,0.4,0], [4, 0.6, 2.5], [4.5, 0.7, 3], [5.9 -0.1, 0.8, 3.5]]);
@@ -253,16 +210,19 @@ function getFullCylinder(r, h, dim){
 }
 
 //tubi trasversali per i sostegni
-var trasversalPillar1 = (getFullCylinder(0.15, 5.15, [32,4]));
-trasversalPillar1 = R([1,2])([PI/2])(trasversalPillar1);
-trasversalPillar1 = T([0,1,2])([-4.3, 5.3, 2.55])(trasversalPillar1);
+function getTrasversalPillars(){
+	var trasversalPillar1 = (getFullCylinder(0.15, 5.15, [32,4]));
+	trasversalPillar1 = R([1,2])([PI/2])(trasversalPillar1);
+	trasversalPillar1 = T([0,1,2])([-4.3, 5.3, 2.55])(trasversalPillar1);
 
-var trasversalPillar2 = (getFullCylinder(0.15, 4.1, [32,4]));
-trasversalPillar2 = R([1,2])([PI/2])(trasversalPillar2);
-trasversalPillar2 = T([0,1,2])([4.3, 4.8, 2.55])(trasversalPillar2);
+	var trasversalPillar2 = (getFullCylinder(0.15, 4.1, [32,4]));
+	trasversalPillar2 = R([1,2])([PI/2])(trasversalPillar2);
+	trasversalPillar2 = T([0,1,2])([4.3, 4.8, 2.55])(trasversalPillar2);
 
-var trasversalPillars = STRUCT([trasversalPillar1, trasversalPillar2]);
-trasversalPillars = COLOR(dark_grey)(trasversalPillars);
+	var trasversalPillars = STRUCT([trasversalPillar1, trasversalPillar2]);
+	trasversalPillars = COLOR(dark_grey)(trasversalPillars);
+	return trasversalPillars;
+}
 
 //altri tubi trasversali per i sostegni
 
@@ -560,7 +520,7 @@ function trasversalUpperTube_2() {
 	return STRUCT([r1,r2,rx]);
 }
 
-function table() {
+function getTable() {
 	var bx1 = BEZIER(S0)([[-8.3, 0.1, 6.35], [-7.5, 0.1, 7.6], [-6.3, 0.1+0.05, 7.4], [-6.4 , 0.1+0.1, 5.75]]);
 	var bx2 = BEZIER(S0)([[-8.3, 5.5-0.1, 6.35], [-7.5, 5.5-0.1, 7.6], [-6.3, 5.5-0.05-0.1, 7.4], [-6.4, 5.5-0.1-0.1, 5.75]]);
 	var s11 = BEZIER(S1)([bx1, bx2]);
@@ -713,7 +673,7 @@ function circl (sel) {
 };
 
 
-function pillow(){
+function getPillow(){
 	var domPI = INTERVALS(2*PI)(40);
 	var pillow = getFullCylinder(1.2/2, 5.25, [64,4]);
 	var stitching1 = MAP(circl(S0)(1/2)(0))(domPI);
@@ -732,11 +692,11 @@ function pillow(){
 	return STRUCT([pillow, stitchings]);
 }
 
-var modelLC4 = STRUCT([feet, getTrasversalTubes(), getTubeFront(), getTubeBack(), trasversalPillars, getOvalTrasversalPillars(), getUpperBackTubes(), getUpperFrontalTubes(),
-	trasversalUpperTube_1(), trasversalUpperTube_2(), table(), pillow()])
-modelLC4 = S([0,1,2])([1.5,1.5,1.5])(modelLC4)
+//modello
+var feet = STRUCT([getFeetFront(), getFeetBack()]);
+var down_pipes = STRUCT([getTrasversalTubes(), getTubeFront(), getTubeBack(), getTrasversalPillars()]);
+var upper_pipes = STRUCT([getOvalTrasversalPillars(), getUpperBackTubes(), getUpperFrontalTubes(), trasversalUpperTube_1(), trasversalUpperTube_2()]);
+var table = getTable();
+var pillow = getPillow();
+var modelLC4 = STRUCT([feet, down_pipes, upper_pipes, table, pillow])
 DRAW(modelLC4);
-
-
-//DA FARE
-//4- SE C'è TEMPO LE FIBBIE DEL MATERASSO SUL TUBO
