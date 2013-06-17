@@ -5,10 +5,10 @@ pipes_color = [139/255, 37/255, 0];
 var numberOfSeats = 1;
 var seat_dx = 4.66;	//+ e - 2.33 se centrato nell'origine
 
-var domainPI = DOMAIN([[0,1],[0,2*PI]])([20,50]);
+var domainPI = DOMAIN([[0,1],[0,2*PI]])([10,32]);
 var domain1D = INTERVALS(1)(20);
-var domain2D = DOMAIN([[0,1],[0,1]])([30,30]);
-var domain3D = DOMAIN([[0,1],[0,1],[0,1]])([120,5,1]);
+var domain2D = DOMAIN([[0,1],[0,1]])([25,25]);
+var domain3D = DOMAIN([[0,1],[0,1],[0,1]])([100,5,1]);
 
 var torus = function (R, r) {
   return function (v) {
@@ -520,7 +520,6 @@ function getSeats(dx, n){
 	var i;
 	if (n % 2 === 0){
 		for (i=1; i<=n; i=i+2){
-			console.log(seats);
 			if (i===1){
 				seats.push(T([0])([dx])(seat), T([0])([-dx])(seat));
 			}
@@ -665,13 +664,42 @@ function getSeatPill2(dx){
 	return STRUCT([frontal1, top, bottom]);
 }
 
+function getAdditionalPipes (dx, n){
+	var pipes = [];
+	if (n>2){
+		var num = n-1;
+		if (n%2 === 0){
+			for (var i = 0; i<(num-1); i++)
+				pipes.push(getPipe(i*dx*2), getPipe(-i*dx*2));
+		}
+		else{
+			for (var i = 0; i<(num-1); i++)
+				pipes.push(getPipe(i*dx*2 -dx), getPipe(-(i*dx*2 -dx)));
+		}
+	}
+	return COLOR(pipes_color)(STRUCT(pipes));
+}
+
+function getPipe(dx){
+	var domain = DOMAIN([[0,2*PI],[0,2*PI]])([45,45]);
+	c1 = CUBIC_HERMITE(S0)([[dx + 0.11, 0.22+6.62+0.23, 5.33+0.23],
+		[dx + 0.11, 0.22+6.62+0.23, 0], 
+		[0,0,0],[0,0,0]]);
+	c2 = CUBIC_HERMITE(S0)([[dx -0.11, 0.22+6.62+0.23, 5.33+0.23], 
+		[dx -0.11, 0.22+6.62+0.23, 0],
+		[0,0,0],[0,0,0]]);
+	sur1 = CUBIC_HERMITE(S1)([c1,c2,[0,0.44,0],[0,-0.44,0]]);
+	sur1 = MAP(sur1)(domain2D);
+	sur2 = CUBIC_HERMITE(S1)([c1,c2,[0,-0.44,0],[0,0.44,0]]);
+	sur2 = MAP(sur2)(domain2D);
+	mapping = torus(0.22/4,0.22/8);
+  	base = T([0,1])([dx, 0.22+6.62+0.23])(MAP(mapping)(domain));
+  	var pipe = STRUCT([sur1, sur2, base]);
+  	return pipe;
+}
 
 var seats = getSeats(seat_dx/2, numberOfSeats);
 var arms = getArms(seat_dx/2, numberOfSeats);
 
-var modelLC2 = STRUCT([seats, arms]);
+var modelLC2 = STRUCT([seats, arms, getAdditionalPipes(seat_dx/2, numberOfSeats)]);
 DRAW(modelLC2);
-
-
-//pensare come gestire il numero di piedi posteriori (e anteriori?) all'aumentare dei seat
-//cambiare i colori
