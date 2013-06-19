@@ -20,6 +20,11 @@ radius = 0.45/2 #2.25
 distance_pillars_y = 7.1
 distance_pillars_x = 11.1
 
+
+domain1D = INTERVALS(1)(20)
+domain2D = DOMAIN([[0,1],[0,1]])([30,30])
+domainPI = DOMAIN2D([ INTERVALS(2 * PI)(32), INTERVALS(2 * PI)(32) ])
+
 def DOMAIN2D(domains1D):
 	def aux(q):
 		a = q[0]
@@ -33,10 +38,6 @@ def DOMAIN2D(domains1D):
 	cells = CAT(AA(aux)(complex[1]))
 	return MKPOL([ points, cells, None ])
 
-domain1D = INTERVALS(1)(20)
-domain2D = DOMAIN([[0,1],[0,1]])([30,30])
-domainPI = DOMAIN2D([ INTERVALS(2 * PI)(32), INTERVALS(2 * PI)(32) ])
-
 def circl (sel) :
 	def circl0 (r) :
 		def circl1 (altezza) :
@@ -45,11 +46,6 @@ def circl (sel) :
 			return circl2
 		return circl1
 	return circl0
-
-def MYEXTRUDE (h):
-	def MYEXTRUDE0(model):
-		return PROD([model,Q(h)])
-	return MYEXTRUDE0
 
 def getFullCylinder(r, h, dim):
 	cyl = annulus_sector(2*PI, 0, radius);

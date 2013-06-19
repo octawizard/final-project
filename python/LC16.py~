@@ -160,11 +160,6 @@ def annulus_sector (alpha, r, R, dim) :
 	model = MAP(mapping)(domain)
 	return model
 
-def MYEXTRUDE (h):
-	def MYEXTRUDE0(model):
-		return PROD([model,Q(h)])
-	return MYEXTRUDE0
-
 def getPillar(r, h, dim):
 	cyl = annulus_sector(2*PI, 0, r, dim);
 	cyl = MYEXTRUDE(h)(cyl)
