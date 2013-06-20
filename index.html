@@ -105,13 +105,13 @@ inserire l'immagine dei sottomodelli e poi modelli finale in python qui
 </p>
 
 <p>Every part of the pipe is built using the PLASM function CUBIC_HERMITE, which allows to obtain a regular pipe, a constant diameter also in the changes of direction along the various the plane axes. The example below shows the javascript code used to implement a generic part of the pipe.
-<pre><code>$ c1 = CUBIC_HERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
- $ c2 = CUBIC_HERMITE(S0)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
- $ sur1 = CUBIC_HERMITE(S1)([c1,c2,[0,0.44,0],[0,-0.44,0]])
- $ sur1 = MAP(sur1)(domain2D)
- $ sur2 = CUBIC_HERMITE(S1)([c1,c2,[0,-0.44,0],[0,0.44,0]])
- $ sur2 = MAP(sur2)(domain2D)
- $ f1x = STRUCT([sur1, sur2])
+<pre><code>$  c1 = CUBIC_HERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
+$  c2 = CUBIC_HERMITE(S0)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
+$  sur1 = CUBIC_HERMITE(S1)([c1,c2,[0,0.44,0],[0,-0.44,0]])
+$  sur1 = MAP(sur1)(domain2D)
+$  sur2 = CUBIC_HERMITE(S1)([c1,c2,[0,-0.44,0],[0,0.44,0]])
+$  sur2 = MAP(sur2)(domain2D)
+$  f1x = STRUCT([sur1, sur2])
 </code></pre>
 </p>
 
