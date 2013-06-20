@@ -25,6 +25,12 @@ time, mark, audio, video {
 
 
 p {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 	text-align:justify;
 	text-justify:inter-word;
 }
