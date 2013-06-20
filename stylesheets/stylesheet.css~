@@ -168,12 +168,11 @@ aside a.button {
   font-size: 21px;
 }
 
-
 code, pre {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color: #222;
   margin-bottom: 30px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 code {
