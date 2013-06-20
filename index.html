@@ -102,8 +102,7 @@ At first the models have been implemented as prototypes using the Python module 
 
 <p>Every part of the pipe is built using the PLASM function CUBICHERMITE, which allows to obtain a regular pipe, a constant diameter also in the changes of direction along the various the plane axes. The example below shows the javascript code used to implement a generic part of the pipe.
 </p>
-<pre><code>
- $ c1 = CUBICHERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
+<pre><code>$ c1 = CUBICHERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
  $ c2 = CUBICHERMITE(S0)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
  $ sur1 = CUBICHERMITE(S1)([c1,c2,[0,0.44,0],[0,-0.44,0]])
  $ sur1 = MAP(sur1)(domain2D)
@@ -112,8 +111,7 @@ At first the models have been implemented as prototypes using the Python module 
  $ f1x = STRUCT([sur1, sur2])
 </code></pre>
 <p>Another interesting part is that relating to the algorithm used to distribute the seats of the sofa, from the origin of the axes. Shown below is the javascript code that implements it. The function getSeats takes as parameters the length, the x-axis, the seating position and the total number of seats of the couch (1 to an arbitrarily large number).</p>
-<pre><code>
-$ function getSeats(dx, n){
+<pre><code>$ function getSeats(dx, n){
 $   var seat = STRUCT([getSeatSkeleton(dx+0.05), getSeatPillows(dx)]);
 $   var seats = [];
 $   var j = 1;
