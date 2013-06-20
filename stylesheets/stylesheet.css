@@ -32,7 +32,6 @@ p {
 	font: inherit;
 	vertical-align: baseline;
 	text-align:justify;
-	text-justify:inter-word;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
