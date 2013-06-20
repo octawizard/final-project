@@ -96,8 +96,17 @@ At first the models have been implemented as prototypes using the Python module 
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC2/lc2_gallery13.jpg">
 </a>More LC2 pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC2" target=”_blank”>here</a></p>
 <p>The basic idea was to decompose the model into two coarse grain parts, the <strong>seat</strong> and the <strong>arms</strong> of the sofa. To implement from time to time a single armchair or sofa variable size with a variable number of places, the idea is to replicate a number of times equal to the number of seats the sub-odel <em>"seat"</em> and placing armrests to the extremes of this new submodel obtained.<br>
-  Increasing the level of detail of decomposition, we have that the two parts are in turn divided into <strong>smaller sub-models</strong>. For example, the the "seat" is divided into subparts that represent the various cushions that compose it, most of the frame tubes encircling it on the back. Regarding the armrests, we have a decomposition in a complex system of pipes that form the structure on which rests the sofa.
-<pre><code>$ insert some code here
+  Increasing the level of detail of decomposition, we have that the two parts are in turn divided into <strong>smaller sub-models</strong>. For example, the the "seat" is divided into subparts that represent the various cushions that compose it, most of the frame tubes encircling it on the back. Regarding the armrests, we have a decomposition in a complex system of pipes that form the structure on which rests the sofa.<br>
+  The levels of decomposition are varied, until arriving to the building of elementary objects to assemble.<br>
+  Below are shown the various components of the prototype developed using the Python module Pyplasm. Subsequently the prototype is shown resulting from the assembly of its various components.<br>
+<pre><code>
+ $ c1 = CUBICHERMITE(S1)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
+ $ c2 = CUBICHERMITE(S1)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
+ $ sur1 = CUBICHERMITE(S2)([c1,c2,[0,0.44,0],[0,-0.44,0]])
+ $ sur1 = MAP(sur1)(domain2D)
+ $ sur2 = CUBICHERMITE(S2)([c1,c2,[0,-0.44,0],[0,0.44,0]])
+ $ sur2 = MAP(sur2)(domain2D)
+ $ f1x = STRUCT([sur1, sur2])
 </code></pre>
 
 <h3>
