@@ -101,6 +101,7 @@ At first the models have been implemented as prototypes using the Python module 
   Below are shown the various components of the prototype developed using the Python module Pyplasm. Subsequently the prototype is shown resulting from the assembly of its various components.<br>
 <a href="https://github.com/octawizard/final-project/blob/master/python/LC2.py" target="_blank">
 inserire l'immagine dei sottomodelli e poi modelli finale in python qui
+</a>
 <p>Every part of the pipe is built using the PLASM function CUBIC_HERMITE, which allows to obtain a regular pipe, a constant diameter also in the changes of direction along the various the plane axes. The example below shows the javascript code used to implement a generic part of the pipe.
 </p>
 <pre><code>$ c1 = CUBIC_HERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
@@ -142,8 +143,7 @@ $}
 </code></pre>
 
 <p>In the following code is instead shown the composition of the sub-models, coarse, which are placed in a STRUCT to assemble the model LC2, in case of an armchair, or LC3 in the case of a sofa. The models <em>arms</em> and <em>seats</em> are in turn broken down into sub simpler models.</p>
-<pre><code>
-$ var seats = getSeats(seat_dx/2, numberOfSeats);
+<pre><code>$ var seats = getSeats(seat_dx/2, numberOfSeats);
 $ var arms = getArms(seat_dx/2, numberOfSeats);
 $ var modelLC2 = STRUCT([seats, arms, getAdditionalPipes(seat_dx/2, numberOfSeats)]);
 $ DRAW(modelLC2);
