@@ -102,8 +102,9 @@ At first the models have been implemented as prototypes using the Python module 
 <a href="https://github.com/octawizard/final-project/blob/master/python/LC2.py" target="_blank">
 inserire l'immagine dei sottomodelli e poi modelli finale in python qui
 </a>
-<p>Every part of the pipe is built using the PLASM function CUBIC_HERMITE, which allows to obtain a regular pipe, a constant diameter also in the changes of direction along the various the plane axes. The example below shows the javascript code used to implement a generic part of the pipe.
 </p>
+
+<p>Every part of the pipe is built using the PLASM function CUBIC_HERMITE, which allows to obtain a regular pipe, a constant diameter also in the changes of direction along the various the plane axes. The example below shows the javascript code used to implement a generic part of the pipe.
 <pre><code>$ c1 = CUBIC_HERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
  $ c2 = CUBIC_HERMITE(S0)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
  $ sur1 = CUBIC_HERMITE(S1)([c1,c2,[0,0.44,0],[0,-0.44,0]])
@@ -112,7 +113,9 @@ inserire l'immagine dei sottomodelli e poi modelli finale in python qui
  $ sur2 = MAP(sur2)(domain2D)
  $ f1x = STRUCT([sur1, sur2])
 </code></pre>
-<p>Another interesting part is that relating to the algorithm used to distribute the seats of the sofa, from the origin of the axes. Shown below is the javascript code that implements it. The function getSeats takes as parameters the length, the x-axis, the seating position and the total number of seats of the couch (1 to an arbitrarily large number).</p>
+</p>
+
+<p>Another interesting part is that relating to the algorithm used to distribute the seats of the sofa, from the origin of the axes. Shown below is the javascript code that implements it. The function getSeats takes as parameters the length, the x-axis, the seating position and the total number of seats of the couch (from one to an arbitrarily large number).
 <pre><code>$ function getSeats(dx, n){
 $   var seat = STRUCT([getSeatSkeleton(dx+0.05), getSeatPillows(dx)]);
 $   var seats = [];
@@ -141,19 +144,21 @@ $   var all_seats = STRUCT(seats);
 $   return (all_seats);
 $}
 </code></pre>
+</p>
 
-<p>In the following code is instead shown the composition of the sub-models, coarse, which are placed in a STRUCT to assemble the model LC2, in case of an armchair, or LC3 in the case of a sofa. The models <em>arms</em> and <em>seats</em> are in turn broken down into sub simpler models.</p>
+<p>In the following code is instead shown the composition of the sub-models, coarse, which are placed in a STRUCT to assemble the model LC2, in case of an armchair, or LC3 in the case of a sofa. The models <em>arms</em> and <em>seats</em> are in turn broken down into sub simpler models.
 <pre><code>$ var seats = getSeats(seat_dx/2, numberOfSeats);
 $ var arms = getArms(seat_dx/2, numberOfSeats);
 $ var modelLC2 = STRUCT([seats, arms, getAdditionalPipes(seat_dx/2, numberOfSeats)]);
 $ DRAW(modelLC2);
 </code></pre>
+</p>
 
 <p>Here is a picture of the complete model implemented by exploiting plasm.js LC2.
-</p>
 <a href="https://github.com/octawizard/final-project/blob/master/LC2.js" target="_blank">
 inserire l'immagine del modello in plasm.js di divano e poltrona qui
 </a>
+</p>
 
 <h3>
 <a name="lc4-chaise-longue--rglage-continu-1928" class="anchor" href="#lc4-chaise-longue--rglage-continu-1928"><span class="octicon octicon-link"></span></a>LC4 Chaise Longue à réglage continu (1928)</h3>
