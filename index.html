@@ -96,18 +96,62 @@ At first the models have been implemented as prototypes using the Python module 
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC2/lc2_gallery13.jpg">
 </a>More LC2 pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC2" target=”_blank”>here</a></p>
 <p>The basic idea was to decompose the model into two coarse grain parts, the <strong>seat</strong> and the <strong>arms</strong> of the sofa. To implement from time to time a single armchair or sofa variable size with a variable number of places, the idea is to replicate a number of times equal to the number of seats the sub-odel <em>"seat"</em> and placing armrests to the extremes of this new submodel obtained.<br>
-  Increasing the level of detail of decomposition, we have that the two parts are in turn divided into <strong>smaller sub-models</strong>. For example, the "seat" is divided into subparts that represent the various cushions that compose it, most of the frame tubes encircling it on the back. Regarding the armrests, we have a decomposition in a complex system of pipes that form the structure on which rests the sofa.<br>
+  Increasing the level of detail of decomposition, we have that the two parts are in turn divided into <strong>smaller sub-models</strong>. For example, the "seat" is divided into subparts that represent the various cushions that compose it, as well as the frame tubes encircling it on the back. Regarding the armrests, we have a decomposition in a complex system of pipes that form the structure on which rests the sofa.<br>
   The levels of decomposition are varied, until arriving to the building of elementary objects to assemble.<br>
   Below are shown the various components of the prototype developed using the Python module Pyplasm. Subsequently the prototype is shown resulting from the assembly of its various components.<br>
+
+<p>Every part of the pipe is built using the PLASM function CUBICHERMITE, which allows to obtain a regular pipe, a constant diameter also in the changes of direction along the various the plane axes. The example below shows the javascript code used to implement a generic part of the pipe.
+</p>
 <pre><code>
- $ c1 = CUBICHERMITE(S1)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
- $ c2 = CUBICHERMITE(S1)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
- $ sur1 = CUBICHERMITE(S2)([c1,c2,[0,0.44,0],[0,-0.44,0]])
+ $ c1 = CUBICHERMITE(S0)([[dx + 0.38, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33+0.34],[0,0,0.75],[0.75,0,0]])
+ $ c2 = CUBICHERMITE(S0)([[dx + 0.38 +0.22, 0, 5.33],[dx + 0.38 +0.22+0.1, 0, 5.33 +0.12],[0,0,0.25],[0.25,0,0]])
+ $ sur1 = CUBICHERMITE(S1)([c1,c2,[0,0.44,0],[0,-0.44,0]])
  $ sur1 = MAP(sur1)(domain2D)
- $ sur2 = CUBICHERMITE(S2)([c1,c2,[0,-0.44,0],[0,0.44,0]])
+ $ sur2 = CUBICHERMITE(S1)([c1,c2,[0,-0.44,0],[0,0.44,0]])
  $ sur2 = MAP(sur2)(domain2D)
  $ f1x = STRUCT([sur1, sur2])
 </code></pre>
+<p>Another interesting part is that relating to the algorithm used to distribute the seats of the sofa, from the origin of the axes. Shown below is the javascript code that implements it. The function getSeats takes as parameters the length, the x-axis, the seating position and the total number of seats of the couch (1 to an arbitrarily large number).</p>
+<pre><code>
+$ function getSeats(dx, n){
+$   var seat = STRUCT([getSeatSkeleton(dx+0.05), getSeatPillows(dx)]);
+$   var seats = [];
+$   var j = 1;
+$   var i;
+$   if (n % 2 === 0){
+$      for (i=1; i<=n; i=i+2){
+$         if (i===1){
+$             seats.push(T([0])([dx])(seat), T([0])([-dx])(seat));
+$         }
+$         else {
+$           seats.push(T([0])([j*2*dx + dx])(seat));
+$           seats.push(T([0])([(j*2*dx + dx)*-1])(seat));
+$           j++;
+$         }
+$       }
+$   }
+$   else{
+$     seats.push(seat);
+$     for (i=2; i<=n; i=i+2){
+$         seats.push(T([0])([2*dx*j])(seat), T([0])([-2*dx*j])(seat));
+$         j++;
+$     }
+$   }
+$   var all_seats = STRUCT(seats);
+$   return (all_seats);
+$}
+</code></pre>
+
+<p>In the following code is instead shown the composition of the sub-models, coarse, which are placed in a STRUCT to assemble the model LC2, in case of an armchair, or LC3 in the case of a sofa. The models <em>arms</em> and <em>seats</em> are in turn broken down into sub simpler models.</p>
+<pre><code>
+$ var seats = getSeats(seat_dx/2, numberOfSeats);
+$ var arms = getArms(seat_dx/2, numberOfSeats);
+$ var modelLC2 = STRUCT([seats, arms, getAdditionalPipes(seat_dx/2, numberOfSeats)]);
+$ DRAW(modelLC2);
+</code></pre>
+
+<p>Here is a picture of the complete model implemented by exploiting plasm.js LC2.
+</p>
 
 <h3>
 <a name="lc4-chaise-longue--rglage-continu-1928" class="anchor" href="#lc4-chaise-longue--rglage-continu-1928"><span class="octicon octicon-link"></span></a>LC4 Chaise Longue à réglage continu (1928)</h3>
