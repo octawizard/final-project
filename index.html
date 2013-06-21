@@ -179,7 +179,7 @@ This 2D model was used as a reference (courtesy of <a href="http://www.cassina.i
   </p>
 <p>Below are shown the various components of the prototype developed using the Python module Pyplasm and then the full prototype, resulting from the assembly of its various components.<br>
 <a href="https://github.com/octawizard/final-project/blob/master/python/LC4.py" target="_blank">
-<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC4/????" title="click to see the python code">
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC4/lc4.all.pyplasm.jpeg" title="click to see the python code">
 </a>
 </p>
 <p>In this model, the pipes are implemented with the BEZIER function; the choice was mandatory, as the shape of the tubes followed curves which changed along three axes together. This fact does not allow the use of the function CUBIC_HERMIT, as it was not possible to define the tangent vector of departure and arrival of the surface without avoiding the strong change in diameter of the pattern of the resulting tube. So were defined four Bezier curves, representatives together the profile of the pipe to be modeled. Then they were in turn passed to the function BEZIER three at a time, to create the surface of the half pipe. Much the same for the other half. This mode of operation is effective in that the tubes are small and are unable to notice the otherwise annoying effect due arrival with different gradients to the curve of arrival and departure, which are those to be interpolated. Following there's an example of that approach.
