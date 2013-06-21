@@ -302,44 +302,40 @@ These 2D models were used as a reference (property of <a href="http://www.cassin
 </a>
 </p>
 
-<p>The facade has an opening in the center. To create the facade correctly, have been used several times the function BEZIER.
-  <pre><code>$   function getFullCylinder(r, h, dim){
-$     var cyl = CYL_SURFACE([r,h])(dim);
-$     var base = DISK(r)(dim);
-$     var base2 = T([2])([h])(base);
-$     var fullCylinder = STRUCT([cyl, base, base2]);
-$     return fullCylinder;
-$   }
+<p>The facade has an opening in the center. To create the facade correctly, have been used several times the function BEZIER. The first use is to trace the contours of the surface. The second is to interpolate two by two the surfaces, to have a slice of facade. Assembling all, the surface of the facade is achieved. Shown below is the code that implements this process.
+  <pre><code>$   def getSurfaceX() :
+$     profile_edge_1 = BEZIER(S1)([[-2, -2, 0], [-2, 2, 0]])
+$     profile_edge_2 = BEZIER(S1)([[2, -2, 0], [2, 2, 0]])
+$     profile_edge_3 = BEZIER(S1)([[-2, -2, 0], [2, -2, 0]])
+$     profile_edge_4 = BEZIER(S1)([[-2, 2, 0], [2, 2, 0]])
+$   
+$     inner_profile_edge_1 = BEZIER(S1)([[-0.5, -0.2, 0], [0.5, -0.2, 0]])
+$     inner_profile_edge_2 = BEZIER(S1)([[-0.5, 0.2, 0], [0.5, 0.2, 0]])
 
-$   var torus = function (R, r) {
-$     return function (v) {
-$       var a = v[0];
-$       var b = v[1]; 
-$       var u = (r * COS(a)+2*R) * (COS(b));
-$       var v = (r * COS(a)+2*R) * (SIN(b));
-$       var w = (r * SIN(a));
-$       return [u,v,w];
-$     }
-$   }
+$     inner_profile_edge_c1 = BEZIER(S1)([[-0.5, -0.2, 0], [-0.7, -0.2, 0], [-0.7, 0.2, 0], [-0.5, 0.2, 0]])
+$     inner_profile_edge_c2 = BEZIER(S1)([[0.5, -0.2, 0], [0.7, -0.2, 0], [0.7, 0.2, 0], [0.5, 0.2, 0]])
 
-$   function getPillar(radius, height) {
-$     height = height - final_disk_spessore;
-$     var domain = DOMAIN([[0,2*PI],[0,2*PI]])([45,45]);
-$     var p = getFullCylinder(radius, height, [32,2]);
-$     p = COLOR(light_gray)(p);
-$     var mapping = torus(radius/2,radius/4);
-$     var base = MAP(mapping)(domain);
-$     base = COLOR(light_gray)(base);
-$     var top = EXTRUDE([final_disk_spessore])(DISK(radius)([36,2]));
-$     top = T([2])([height])(top);
-$     top = COLOR([0,0,0])(top);
-$     return STRUCT([p, base, top]);
+$     profile_surface_x1 = BEZIER(S2)([profile_edge_3, inner_profile_edge_1])
+$     profile_surface_x2 = BEZIER(S2)([profile_edge_4, inner_profile_edge_2])
+$     profile_surface_x3 = BEZIER(S2)([inner_profile_edge_c2, profile_edge_2])
+$     profile_surface_x4 = BEZIER(S2)([inner_profile_edge_c1, profile_edge_1])
+
+$     sx1 = MAP(profile_surface_x1)(domain2D)
+$     sx2 = MAP(profile_surface_x2)(domain2D)
+$     sx3 = MAP(profile_surface_x3)(domain2D)
+$     sx4 = MAP(profile_surface_x4)(domain2D)
+   
+$     surface_x = STRUCT([sx1, sx2, sx3, sx4])
+$     return surface_x
 $   }</code></pre>
+
+Here are shown what that code can return. Specifically, the surfaces are shown sx1, and sx1 and sx3 together.
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC16/sur_all.jpeg" title="some parts of a chair surface">
 </p>
 
-<p>Here is a picture of the LC10-P complete model implemented by exploiting plasm.js.
-<a href="https://github.com/octawizard/final-project/blob/master/LC10.js" target="_blank">
-<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/lc10.plasmjs.jpeg" title="click to see the js code">
+<p>Here is a picture of the LC16 and LC14 complete model implemented by exploiting plasm.js.
+<a href="https://github.com/octawizard/final-project/blob/master/LC16.js" target="_blank">
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC16/lc16.plasmjs.jpeg" title="click to see the js code">
 </a>
 </p>
 
