@@ -222,14 +222,12 @@ $   DRAW(modelLC4);
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/lc_10_p_gallery06.jpg">
 <div align="center"><em></a>More LC10-P pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC10" target=”_blank”>here</a></em></div></p>
 
-<p>The model LC10-P is divided into the following components: tableLedge, pillars and junctions. For the implementation of the model was carried out a thorough preliminary phase in which were calculated interesting measurements of the table. These measures were then saved in the code and used as parameters for the correct positioning of the various components in space. <br></p>
+<p>The model LC10-P is divided into the following components: <strong>tableLedge</strong>, <strong>pillars</strong> and <strong>junctions</strong>. For the implementation of the model was carried out a thorough preliminary phase in which were calculated interesting measurements of the table. These measures were then saved in the code and used as parameters for the correct positioning of the various components in space. <br></p>
   <p>
 These 2D models were used as a reference (property of <a href="http://www.cassina.it">Cassina S.p.A.</a>)
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/LC10.2Dmodel.png" title="2D model of LC10-P">
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/LC10.2Dmodel.2.png" title="2D model of LC10-P">
   </p>
-
-<p>For the creation of the pillars, was created getPillar a function that returns a generic model of the pillar. It takes as parameters the radius and height of the pillar. Even here we have a decomposition of the submodel pillar, in its basic components (in the code <em>top</em>, <em>base</em> and <em>p</em>). The pillars that compose the model are then translated appropriately based on the parameters related to the size of the table. Here is the code related to the above.
 
 <p>Below are shown the various components of the prototype developed using the Python module Pyplasm and then the full prototype, resulting from the assembly of its various components.<br>
 <a href="https://github.com/octawizard/final-project/blob/master/python/LC10.py" target="_blank">
@@ -237,6 +235,7 @@ These 2D models were used as a reference (property of <a href="http://www.cassin
 </a>
 </p>
 
+<p>For the creation of the pillars, was created a function getPillar that returns a generic model of the pillar. It takes as parameters the radius and height of the pillar. Even here we have a decomposition of the submodel pillar, in its basic components (in the code <em>top</em>, <em>base</em> and <em>p</em>). The pillars that compose the model are then translated appropriately based on the parameters related to the size of the table. Here is the code related to the above.
   <pre><code>$   function getFullCylinder(r, h, dim){
 $     var cyl = CYL_SURFACE([r,h])(dim);
 $     var base = DISK(r)(dim);
