@@ -2,7 +2,7 @@
 sofa_color = [143/255, 188/255, 143/255];
 pipes_color = [139/255, 37/255, 0];
 
-var numberOfSeats = 1;
+var numberOfSeats = 3;
 var seat_dx = 4.66;	//+ e - 2.33 se centrato nell'origine
 
 var domainPI = DOMAIN([[0,1],[0,2*PI]])([10,32]);

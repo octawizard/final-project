@@ -165,4 +165,7 @@ junctions = getJunctions(radius*2, 0.02, 0.2, 0.32)	#spessore sostegno che unisc
 
 tableLedge = getTableLedge(dx, dy, dz)
 modelLC10 = STRUCT([pillars, junctions, tableLedge])
+VIEW(tableLedge)
+VIEW(junctions)
+VIEW(pillars)
 VIEW(modelLC10)

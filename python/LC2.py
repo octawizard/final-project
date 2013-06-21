@@ -4,7 +4,7 @@ from pyplasm import *
 sofa_color = [143.0/255, 188.0/255, 143.0/255]
 pipes_color = [139.0/255, 37.0/255, 0]
 
-numberOfSeats = 1
+numberOfSeats = 3
 seat_dx = 4.66	#+ e - 2.33 se centrato nell'origine
 
 def DOMAIN2D(domains1D):
@@ -694,5 +694,6 @@ if (numberOfSeats>2):
 	modelLC2 = STRUCT([seats, arms, getAdditionalPipes(seat_dx/2, numberOfSeats)])
 else:
 	modelLC2 = STRUCT([seats, arms])
-
+VIEW(seats)
+VIEW(arms)
 VIEW(modelLC2)
