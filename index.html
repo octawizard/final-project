@@ -97,7 +97,7 @@ At first the models have been implemented as prototypes using the Python module 
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC2/lc2_gallery13.jpg">
 </a>
 <div align="center"><em>More LC2 pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC2" target=”_blank”>here</a></em></div></p>
-<p>The basic idea was to decompose the model into two coarse grain parts, the <strong>seat</strong> and the <strong>arms</strong> of the sofa. To implement from time to time a single armchair or a sofa with a variable number of seats, the idea was to replicate a number of times equal to the number of seats the sub-model <em>seat</em> and placing armrests to the extremes of this new submodel obtained.<br>
+<p>The basic idea was to decompose the model of LC2 into two coarse grain parts, the <strong>seat</strong> and the <strong>arms</strong> of the sofa. To implement from time to time a single armchair or a sofa with a variable number of seats, the idea was to replicate a number of times equal to the number of seats the sub-model <em>seat</em> and placing armrests to the extremes of this new submodel obtained.<br>
   Increasing the level of detail of decomposition, we have that the two parts are in turn divided into <strong>smaller sub-models</strong>. For example, the <em>seat</em> is divided into subparts that represent the various cushions that compose it, as well as the frame tubes encircling it on the back. Regarding the armrests, we have a decomposition in a complex system of pipes that form the structure on which rests the sofa pillows.There are several decomposotion levels, until arriving to the building of elementary objects to assemble.</p>
   <p>
 This 2D model was used as a reference (property of <a href="http://www.cassina.it">Cassina S.p.A.</a>)
@@ -121,7 +121,7 @@ $   f1x = STRUCT([sur1, sur2])
 </code></pre>
 </p>
 
-<p>Another interesting part is that relating to the algorithm used to distribute the seats of the sofa, from the origin of the axes. Shown below is the javascript code that implements it. The function getSeats takes as parameters the seat length on the x-axis, and the total number of seats of the couch (with <em>n</em> greater or equal to one).
+<p>Another interesting part is that relating to the algorithm used to distribute the seats of the sofa, from the origin of the axes. Shown below is the javascript code that implements it. The function <code>getSeats</code> takes as parameters the seat length on the x-axis, and the total number of seats of the couch (with <em>n</em> greater or equal to one).
 <pre><code>$   function getSeats(dx, n){
 $   var seat = STRUCT([getSeatSkeleton(dx+0.05), getSeatPillows(dx)]);
 $   var seats = [];
@@ -173,7 +173,7 @@ $   DRAW(modelLC2);
 <p><a href="http://www.cassina.com/portal/page/portal/new/webpages/cassina/catalogue/product?p=code:CS_004;is_finder_result:0&lang=it" target=”_blank”>
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC4/lc_4_gallery09.jpg">
 <div align="center"><em></a>More LC4 pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC4" target=”_blank”>here</a></em></div></p>
-<p>The model LC4 was perhaps the most complex of those implemented. To facilitate its modeling, it was decided to center it along the x axis. Note how the model is not even regular the y axis; in fact, looking from above, you can see how the Long Chair go to shrink in width in the vicinity of the end of the little mattress. The model has been decomposed into the following parts: <strong>feet</strong>, <strong>down pipes</strong>, <strong>upper pipes</strong>, <strong>table</strong> and <strong>pillow</strong>. Each of the sub-models is in turn decomposed into sub-models, also very complex, as in the case of tubes that make up the frame of LC4. Regarding the modeling of the tubes of the frame, the approach used has been to draw first <em>"frontal"</em> ones (taking as a reference an image like <a href="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC4/lc_4_gallery03.jpg" target="_blank">that</a>) and then those <em>"on the back"</em>, properly mirroring the "frontal" along the y-axis. The following step was connecting the two. <br></p>
+<p>The model of LC4 was perhaps the most complex of those implemented. To facilitate its modeling, it was decided to center it along the x axis. Note how the model is not even regular the y axis; in fact, looking from above, you can see how the Long Chair go to shrink in width in the vicinity of the end of the little mattress. The model has been decomposed into the following parts: <strong>feet</strong>, <strong>down pipes</strong>, <strong>upper pipes</strong>, <strong>table</strong> and <strong>pillow</strong>. Each of the sub-models is in turn decomposed into sub-models, also very complex, as in the case of tubes that make up the frame of LC4. Regarding the modeling of the tubes of the frame, the approach used has been to draw first <em>"frontal"</em> ones (taking as a reference an image like <a href="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC4/lc_4_gallery03.jpg" target="_blank">that</a>) and then those <em>"on the back"</em>, properly mirroring the "frontal" along the y-axis. The following step was connecting the two. <br></p>
   <p>
 This 2D model was used as a reference (property of <a href="http://www.cassina.it">Cassina S.p.A.</a>)
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC4/LC4.2Dmodel.png" title="2D model of LC4">
@@ -222,7 +222,7 @@ $   DRAW(modelLC4);
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/lc_10_p_gallery06.jpg">
 <div align="center"><em></a>More LC10-P pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC10" target=”_blank”>here</a></em></div></p>
 
-<p>The model LC10-P is divided into the following components: <strong>tableLedge</strong>, <strong>pillars</strong> and <strong>junctions</strong>. For the implementation of the model was carried out a thorough preliminary phase in which were calculated interesting measurements of the table. These measures were then saved in the code and used as parameters for the correct positioning of the various components in space. <br></p>
+<p>The model of LC10-P is divided into the following components: <strong>tableLedge</strong>, <strong>pillars</strong> and <strong>junctions</strong>. For the implementation of the model was carried out a thorough preliminary phase in which were calculated interesting measurements of the table. These measures were then saved in the code and used as parameters for the correct positioning of the various components in space. <br></p>
   <p>
 These 2D models were used as a reference (property of <a href="http://www.cassina.it">Cassina S.p.A.</a>)
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/LC10.2Dmodel.png" title="2D model of LC10-P">
@@ -235,7 +235,7 @@ These 2D models were used as a reference (property of <a href="http://www.cassin
 </a>
 </p>
 
-<p>For the creation of the pillars, was created a function getPillar that returns a generic model of the pillar. It takes as parameters the radius and height of the pillar. Even here we have a decomposition of the submodel pillar, in its basic components (in the code <em>top</em>, <em>base</em> and <em>p</em>). The pillars that compose the model are then translated appropriately based on the parameters related to the size of the table. Here is the code related to the above.
+<p>For the creation of the pillars, was created a function <code>getPillar</code> that returns a generic model of the pillar. It takes as parameters the radius and height of the pillar. Even here we have a decomposition of the submodel pillar, in its basic components (in the code <em>top</em>, <em>base</em> and <em>p</em>). The pillars that compose the model are then translated appropriately based on the parameters related to the size of the table. Here is the code related to the above.
   <pre><code>$   function getFullCylinder(r, h, dim){
 $     var cyl = CYL_SURFACE([r,h])(dim);
 $     var base = DISK(r)(dim);
@@ -285,6 +285,63 @@ The LC14 is a stool in solid oak, natural dyed. Present, the two main facades, o
 <p><a href="http://www.cassina.com/portal/page/portal/new/webpages/cassina/catalogue/product?p=code:CS_016;is_finder_result:0&lang=it" target=”_blank”>
 <img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC16/lc16-lecorbusier-4.jpg">
 <div align="center"><em></a>More LC16 and LC14 pictures can be found <a href="https://github.com/octawizard/final-project/tree/gh-pages/images/myImages/LC16" target=”_blank”>here</a></em></div></p>
+
+<p>The unified model of LC16 and LC14 is divided into the following components: <strong>library</strong>, <strong>table</strong> and <strong>chairs</strong>. The component <em>library</em> was constructed using CUBOID models, whose dimensions and positions were obtained in a measurement phase of the model. Library has been decomposed into 
+  three sub-models, a central library, one right and one left. These three submodels use the definition of a further submodel of generic library, which is then customized to produce the different libraries (central, right and left). The <em>table</em> submodel has been decomposed into two further sub-models: the shelf and the pillar on which it stands. The model of <em>chairs</em>, which represents the model LC14, was decomposed into submodels that represent the facades of the cuboid-chair. So we have the construction of each type of facade, each of which is replicated and translated to form the pattern of the parallelepiped.
+</p>
+
+  <p>
+These 2D models were used as a reference (property of <a href="http://www.cassina.it">Cassina S.p.A.</a>)
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC16/LC16.2Dmodel.png" title="2D model of LC16">
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC16/LC16.2Dmodel2.png" title="2D model of LC16">
+  </p>
+
+<p>Below are shown the various components of the prototype developed using the Python module Pyplasm and then the full prototype, resulting from the assembly of its various components.<br>
+<a href="https://github.com/octawizard/final-project/blob/master/python/LC10.py" target="_blank">
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/lc10.all.pyplasm.jpeg" title="click to see the python code">
+</a>
+</p>
+
+<p>The facade has an opening in the center. To create the facade correctly, have been used several times the function BEZIER.
+  <pre><code>$   function getFullCylinder(r, h, dim){
+$     var cyl = CYL_SURFACE([r,h])(dim);
+$     var base = DISK(r)(dim);
+$     var base2 = T([2])([h])(base);
+$     var fullCylinder = STRUCT([cyl, base, base2]);
+$     return fullCylinder;
+$   }
+
+$   var torus = function (R, r) {
+$     return function (v) {
+$       var a = v[0];
+$       var b = v[1]; 
+$       var u = (r * COS(a)+2*R) * (COS(b));
+$       var v = (r * COS(a)+2*R) * (SIN(b));
+$       var w = (r * SIN(a));
+$       return [u,v,w];
+$     }
+$   }
+
+$   function getPillar(radius, height) {
+$     height = height - final_disk_spessore;
+$     var domain = DOMAIN([[0,2*PI],[0,2*PI]])([45,45]);
+$     var p = getFullCylinder(radius, height, [32,2]);
+$     p = COLOR(light_gray)(p);
+$     var mapping = torus(radius/2,radius/4);
+$     var base = MAP(mapping)(domain);
+$     base = COLOR(light_gray)(base);
+$     var top = EXTRUDE([final_disk_spessore])(DISK(radius)([36,2]));
+$     top = T([2])([height])(top);
+$     top = COLOR([0,0,0])(top);
+$     return STRUCT([p, base, top]);
+$   }</code></pre>
+</p>
+
+<p>Here is a picture of the LC10-P complete model implemented by exploiting plasm.js.
+<a href="https://github.com/octawizard/final-project/blob/master/LC10.js" target="_blank">
+<img src="https://raw.github.com/octawizard/final-project/gh-pages/images/myImages/LC10/lc10.plasmjs.jpeg" title="click to see the js code">
+</a>
+</p>
 
 <hr><h1>
 <a name="disclaimer" class="anchor" href="#disclaimer"><span class="octicon octicon-link"></span></a>Disclaimer</h1>
