@@ -104,8 +104,8 @@ def getSurfaceX() :
 
 	profile_surface_x1 = BEZIER(S2)([profile_edge_3, inner_profile_edge_1])
 	profile_surface_x2 = BEZIER(S2)([profile_edge_4, inner_profile_edge_2])
-	profile_surface_x3 = BEZIER(S2)([profile_edge_2, inner_profile_edge_c2])
-	profile_surface_x4 = BEZIER(S2)([profile_edge_1, inner_profile_edge_c1])
+	profile_surface_x3 = BEZIER(S2)([inner_profile_edge_c2, profile_edge_2])
+	profile_surface_x4 = BEZIER(S2)([inner_profile_edge_c1, profile_edge_1])
 
 	sx1 = MAP(profile_surface_x1)(domain2D)
 	sx2 = MAP(profile_surface_x2)(domain2D)
@@ -122,7 +122,7 @@ def getSurfaceY() :
 	profile_edge_3 = BEZIER(S1)([[-1.5, -2, 0], [1.5, -2, 0]])
 	profile_edge_4 = BEZIER(S1)([[-1.5, 2, 0], [1.5, 2, 0]])
 
-	profile_surface_y1 = BEZIER(S2)([profile_edge_1, profile_edge_2])
+	profile_surface_y1 = BEZIER(S2)([profile_edge_2, profile_edge_1])
 	return MAP(profile_surface_y1)(domain2D)
 
 def getChair() :
@@ -183,5 +183,8 @@ def getPlane():
 
 # MODELLI LC16 E LC14
 modelLC16_LC14 = STRUCT([getLibrary(), getTable(), getChairs()])
+VIEW(getLibrary())
+VIEW(getChairs())
+VIEW(getTable())
 modelLC16_LC14 = COLOR(wood)(modelLC16_LC14)
 VIEW(modelLC16_LC14)
